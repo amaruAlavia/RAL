@@ -217,3 +217,42 @@ internalCarousels.forEach(carousel => {
         });
     }
 });
+
+// Mobile Bottom Bar Logic - Hide on Hero (Top) and Footer (Bottom)
+const mobileBar = document.querySelector(".mobile-bottom-bar");
+const footer = document.querySelector("footer");
+const hero = document.getElementById("hero");
+
+if (mobileBar) {
+    let isHeroVisible = true; // Default to true initially
+    let isFooterVisible = false;
+
+    const updateBarState = () => {
+        if (isHeroVisible || isFooterVisible) {
+            mobileBar.classList.add("hidden");
+        } else {
+            mobileBar.classList.remove("hidden");
+        }
+    };
+
+    const observerCallback = (entries) => {
+        entries.forEach(entry => {
+            if (entry.target === hero) {
+                isHeroVisible = entry.isIntersecting;
+            } else if (entry.target === footer) {
+                isFooterVisible = entry.isIntersecting;
+            }
+        });
+        updateBarState();
+    };
+
+    const observer = new IntersectionObserver(observerCallback, {
+        threshold: 0.1 // Trigger when 10% is visible
+    });
+
+    if (hero) observer.observe(hero);
+    if (footer) observer.observe(footer);
+
+    // Initial check
+    updateBarState();
+}
