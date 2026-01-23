@@ -640,13 +640,42 @@ footer {
 /* Audio Control Button */
 .audio-control {
     position: absolute;
-    bottom: 20px;
-    right: 20px;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 100;
-    background: rgba(255, 255, 255, 0.2);
-    height: 24px;
-    fill: white;
-    stroke: none;
+
+    /* Modern Glassmorphism */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 56px;
+    height: 56px;
+    
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.audio-control:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateX(-50%) scale(1.1);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.audio-control svg {
+    /* Ensure icon size */
+    width: 28px;
+    height: 28px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
 }
 
 /* Override generic section animation for #nosotros to let ScrollReveal handle it */
