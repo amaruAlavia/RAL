@@ -359,13 +359,13 @@ section {
     padding: 100px 10%;
     background: #fafafa;
     opacity: 0;
-    transform: translateX(50px);
+    transform: translateY(50px);
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
 section.section-visible {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
 }
 
 section:nth-of-type(even) {
