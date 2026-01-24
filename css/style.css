@@ -557,7 +557,14 @@ footer {
     text-align: left;
 }
 
-.footer-brand span:first-child {
+.footer-logo {
+    max-width: 80px;
+    height: auto;
+    margin-bottom: 5px;
+    opacity: 0.9;
+}
+
+.footer-brand span:first-of-type {
     font-family: "Playfair Display", serif;
     font-size: 16px;
     color: #fff;
