@@ -181,3 +181,22 @@ if (mobileBar) {
     // Initial check
     updateBarState();
 }
+
+// Simple Parallax for About Image
+const aboutSection = document.getElementById('nosotros');
+const aboutImg = document.querySelector('.about-img-main');
+
+if (aboutSection && aboutImg && window.innerWidth > 900) {
+    window.addEventListener('scroll', () => {
+        const sectionTop = aboutSection.offsetTop;
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+
+        // Only calculate if section is somewhat visible to save performance
+        if (scrollY + windowHeight > sectionTop && scrollY < sectionTop + aboutSection.offsetHeight) {
+            const speed = 0.1; // Adjust speed
+            const offset = (scrollY - sectionTop) * speed;
+            aboutImg.style.transform = `translateY(${offset}px)`;
+        }
+    });
+}
