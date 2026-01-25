@@ -347,14 +347,6 @@ img {
 section {
     padding: 100px 10%;
     background: #fafafa;
-    opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-section.section-visible {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 section:nth-of-type(even) {
@@ -789,12 +781,6 @@ footer {
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
-/* Override generic section animation for #nosotros to let ScrollReveal handle it */
-#nosotros {
-    opacity: 1;
-    transform: none;
-    transition: none;
-}
 
 /* ---------- MASONRY GALLERY ---------- */
 .masonry-grid {

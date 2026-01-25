@@ -26,68 +26,10 @@ if (toggle && mobileMenu) {
 
 
 // Section Scroll Animation
-const sections = document.querySelectorAll("section:not(#nosotros)");
-const observerOptions = {
-    threshold: 0.15
-};
-
-const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add("section-visible");
-            observer.unobserve(entry.target); // Animate only once
-        }
-    });
-}, observerOptions);
-
-
-sections.forEach(section => {
-    observer.observe(section);
-});
+// Section Scroll Animation removed
 
 // ScrollReveal for Nosotros section
-const sr = ScrollReveal({
-    origin: 'bottom',
-    distance: '60px',
-    duration: 1000,
-    delay: 200,
-    reset: false
-});
-
-if (document.getElementById('nosotros')) {
-    sr.reveal('.about-image', {
-        origin: 'left',
-        distance: '120px',
-        duration: 1400,
-        opacity: 0,
-        scale: 0.85
-    });
-
-    sr.reveal('.about-content', {
-        origin: 'right',
-        distance: '60px',
-        duration: 1400,
-        delay: 400
-    });
-
-    sr.reveal('.about-highlight', {
-        origin: 'bottom',
-        delay: 800,
-        scale: 0.9,
-        duration: 1500
-    });
-}
-
-// ScrollReveal for Tours
-if (document.querySelector('.tour-card')) {
-    sr.reveal('.tour-card', {
-        interval: 200,
-        origin: 'bottom',
-        distance: '50px',
-        duration: 1200,
-        viewFactor: 0.2
-    });
-}
+// ScrollReveal removed
 
 // Audio Control
 const audio = document.getElementById("heroAudio");
