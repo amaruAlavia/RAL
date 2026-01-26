@@ -4,6 +4,19 @@
 
 
 
+
+:root {
+    /* Fonts */
+    --font-primary: "Montserrat", sans-serif;
+    --font-secondary: "Playfair Display", serif;
+
+    /* Weights */
+    --weight-light: 300;
+    --weight-regular: 400;
+    --weight-medium: 500;
+    --weight-bold: 700;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -11,7 +24,7 @@
 }
 
 body {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-primary);
     color: #333;
     background: #fafafa;
     overflow-x: hidden;
@@ -19,7 +32,7 @@ body {
 }
 
 .text-highlight {
-    font-family: "Playfair Display", serif;
+    font-family: var(--font-secondary);
     font-style: italic;
     font-weight: 400;
 }
@@ -125,7 +138,7 @@ img {
 }
 
 .logo-refugio {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-primary);
     font-size: 12px;
     letter-spacing: 2px;
     font-weight: 400;
@@ -133,7 +146,7 @@ img {
 }
 
 .logo-alma {
-    font-family: "Playfair Display", serif;
+    font-family: var(--font-secondary);
     font-size: 28px;
     letter-spacing: 1px;
     font-weight: 400;
@@ -141,7 +154,7 @@ img {
 }
 
 .logo-lodge {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-primary);
     font-size: 11px;
     letter-spacing: 2px;
     font-weight: 500;
@@ -163,7 +176,7 @@ img {
     letter-spacing: 1px;
     text-decoration: none;
     transition: all 0.3s ease;
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-primary);
     font-weight: 500;
 }
 
@@ -233,7 +246,7 @@ img {
 
 .mobile-menu a {
     text-decoration: none;
-    font-family: "Playfair Display", serif;
+    font-family: var(--font-secondary);
     font-size: 32px;
     text-transform: capitalize;
     /* Or uppercase, Awasi uses elegant mix */
@@ -531,7 +544,7 @@ p {
 
 .cinema-content h3 {
     font-size: 36px;
-    font-family: "Playfair Display", serif;
+    font-family: var(--font-secondary);
     margin-bottom: 10px;
     line-height: 1.1;
 }
@@ -638,17 +651,117 @@ p {
     inset: 0;
     z-index: 10;
     background-color: #1a1a1a;
-    background-size: cover;
-    background-position: center;
     display: flex;
-    /* Centered content */
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    flex-direction: row;
+    /* Split screen default */
+    width: 100%;
+    height: 100%;
     transition: opacity 1s ease, visibility 1s ease;
     opacity: 1;
     visibility: visible;
+}
+
+.cover-text-panel {
+    flex: 1;
+    background: #111;
+    /* Dark solid background for text */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    /* Left align text */
+    padding: 60px 80px;
+    z-index: 2;
+}
+
+.cover-video-panel {
+    flex: 1.2;
+    /* Video takes slightly more space */
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+
+.cover-video-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Update content styles for split screen */
+.cover-content {
+    max-width: 100%;
+    text-align: left;
+    color: #fff;
+    padding: 0;
+}
+
+.cover-content h2 {
+    font-size: 48px;
+    margin-bottom: 24px;
+}
+
+/* Adjust button for left alignment */
+.btn-outline-white {
+    align-self: flex-start;
+}
+
+/* Responsive adjustment */
+@media (max-width: 900px) {
+    .location-cover-layer {
+        flex-direction: column-reverse;
+        /* Text bottom, Video top */
+        height: 100%;
+    }
+
+    .cover-video-panel {
+        flex: 7;
+        /* 70% */
+        height: 70%;
+    }
+
+    .cover-text-panel {
+        flex: 3;
+        /* 30% */
+        height: 30%;
+        padding: 15px;
+        /* Slightly more padding */
+        justify-content: center;
+    }
+
+    .cover-content {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .cover-content h2 {
+        font-size: 24px;
+        margin-bottom: 6px;
+    }
+
+    .cover-content h3 {
+        font-size: 11px;
+        margin-bottom: 8px;
+        display: block;
+        /* Show address again with 30% space */
+    }
+
+    .cover-content p {
+        display: none;
+        /* Keep description hidden */
+    }
+
+
+    .btn-outline-white {
+        align-self: center;
+        padding: 8px 20px;
+        font-size: 10px;
+        margin-top: 4px;
+    }
 }
 
 .cover-overlay {
@@ -670,13 +783,13 @@ p {
 }
 
 .cover-content h2 {
-    font-family: "Playfair Display", serif;
+    font-family: var(--font-secondary);
     font-size: 42px;
     margin-bottom: 20px;
 }
 
 .cover-content h3 {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-primary);
     font-size: 16px;
     font-weight: 400;
     letter-spacing: 1px;
@@ -736,6 +849,63 @@ p {
     /* Let clicks pass through to map */
 }
 
+/* Close Map Button */
+.btn-close-map {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #fff;
+    color: #111;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 12px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-20px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 20;
+    /* Keep above map */
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.location-atmospheric.map-visible .btn-close-map {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.btn-close-map:hover {
+    background: #111;
+    color: #fff;
+}
+
+
+/* ---------- GLASSMORPHISM CARD (New) ---------- */
+.glass-card {
+    background: rgba(0, 0, 0, 0.3);
+    /* Dark glass for contrast with white text */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    padding: 50px 40px;
+    transition: transform 0.3s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.25);
+    background: rgba(0, 0, 0, 0.35);
+}
+
 
 /* ---------- MINIMALIST CONTACT ---------- */
 .contact-container {
@@ -770,7 +940,7 @@ p {
     border-bottom: 1px solid #ccc;
     padding: 15px 0;
     font-size: 18px;
-    font-family: "Playfair Display", serif;
+    font-family: var(--font-secondary);
     color: #333;
     transition: border-color 0.3s, padding-left 0.3s;
     border-radius: 0;
@@ -792,7 +962,7 @@ p {
 .btn-text-only {
     background: none;
     border: none;
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-primary);
     text-transform: uppercase;
     font-size: 14px;
     letter-spacing: 2px;
@@ -919,7 +1089,7 @@ footer {
 }
 
 .footer-brand span:first-of-type {
-    font-family: "Playfair Display", serif;
+    font-family: var(--font-secondary);
     font-size: 16px;
     color: #fff;
     letter-spacing: 1px;
@@ -1067,7 +1237,7 @@ footer {
         padding: 14px;
         text-decoration: none;
         text-transform: uppercase;
-        font-family: "Montserrat", sans-serif;
+        font-family: var(--font-primary);
         font-size: 13px;
         letter-spacing: 2px;
         border-radius: 4px;
@@ -1228,9 +1398,10 @@ footer {
     padding: 20px;
 }
 
-.about-subtitle {
+.about-subtitle,
+.section-subtitle {
     display: block;
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-primary);
     font-size: 13px;
     letter-spacing: 3px;
     text-transform: uppercase;
@@ -1240,7 +1411,7 @@ footer {
 }
 
 .about-content h2 {
-    font-family: "Playfair Display", serif;
+    font-family: var(--font-secondary);
     font-size: 48px;
     line-height: 1.2;
     margin-bottom: 30px;
@@ -1263,7 +1434,7 @@ footer {
 }
 
 .about-highlight p {
-    font-family: "Playfair Display", serif;
+    font-family: var(--font-secondary);
     font-size: 20px;
     font-style: italic;
     color: #333;
@@ -1338,7 +1509,7 @@ footer {
 }
 
 .tour-content h3 {
-    font-family: "Playfair Display", serif;
+    font-family: var(--font-secondary);
     font-size: 26px;
     margin-bottom: 12px;
     color: #222;
@@ -1361,7 +1532,7 @@ footer {
     background: #fdfdfd;
     border: 1px solid #c5a065;
     color: #c5a065;
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-primary);
     font-size: 13px;
     text-decoration: none;
     text-transform: uppercase;
@@ -1439,7 +1610,7 @@ footer {
 
 .unit-subtitle {
     display: block;
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-primary);
     font-size: 12px;
     letter-spacing: 3px;
     text-transform: uppercase;
@@ -1449,7 +1620,7 @@ footer {
 }
 
 .unit-content h2 {
-    font-family: "Playfair Display", serif;
+    font-family: var(--font-secondary);
     font-size: 42px;
     margin-bottom: 10px;
     color: #222;
@@ -1457,7 +1628,7 @@ footer {
 }
 
 .unit-price {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-primary);
     font-size: 24px;
     color: #333;
     margin-bottom: 20px;

@@ -210,3 +210,11 @@ if (revealMapBtn && locationSection) {
         locationSection.classList.add('map-visible');
     });
 }
+
+// Close Map logic
+const closeMapBtn = document.getElementById('closeMapBtn');
+if (closeMapBtn && locationSection) {
+    closeMapBtn.addEventListener('click', () => {
+        locationSection.classList.remove('map-visible');
+    });
+}
