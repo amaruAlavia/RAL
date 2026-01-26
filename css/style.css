@@ -34,6 +34,14 @@ section:nth-of-type(odd) {
     background: #fff;
 }
 
+/* Remove texture from specific sections as requested */
+#experiencias,
+#galeria,
+#contacto {
+    background-image: none;
+    background-color: #fff;
+}
+
 img {
     display: block;
     max-width: 100%;
@@ -598,54 +606,134 @@ p {
     }
 }
 
-/* ---------- LOCATION FLOATING CARD ---------- */
-.location-wrapper {
+
+/* ---------- ATMOSPHERIC LOCATION ---------- */
+.location-atmospheric {
     position: relative;
-    width: 100%;
     height: 600px;
-    /* Force height */
+    width: 100%;
     overflow: hidden;
-    display: flex;
-    /* For alignment */
-    align-items: center;
-    /* Vertically center the card */
+    padding: 0 !important;
+    /* Override generic section padding */
+    display: block;
+    /* Ensure block */
 }
 
-/* Make map fill the container absolutely */
-.location-map-full {
+.location-map-layer {
     position: absolute;
     inset: 0;
-    width: 100%;
-    height: 100%;
     z-index: 0;
-}
-
-.location-map-full iframe {
-    height: 100%;
     width: 100%;
+    height: 100%;
+}
+
+.location-map-layer iframe {
+    width: 100%;
+    height: 100%;
     border: 0;
-    filter: grayscale(100%) contrast(1.1);
-    /* Elegant monochrome map */
-    transition: filter 0.5s;
 }
 
-.location-map-full:hover iframe {
-    filter: grayscale(0%);
-    /* Color on hover */
-}
-
-.location-card-floating {
-    position: relative;
+.location-cover-layer {
+    position: absolute;
+    inset: 0;
     z-index: 10;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 50px;
-    max-width: 450px;
-    margin-left: 10%;
-    /* Offset from left */
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
-    border-left: 5px solid #111;
-    /* Accent line */
+    background-color: #1a1a1a;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    /* Centered content */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: opacity 1s ease, visibility 1s ease;
+    opacity: 1;
+    visibility: visible;
+}
+
+.cover-overlay {
+    position: absolute;
+    inset: 0;
+    /* Reduced darkness to show video clearly */
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 1;
+}
+
+
+
+.cover-content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    padding: 20px;
+    max-width: 600px;
+}
+
+.cover-content h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+
+.cover-content h3 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+.cover-content p {
+    font-size: 18px;
+    font-style: italic;
+    opacity: 0.9;
+    margin-bottom: 30px;
+}
+
+
+.btn-outline-white {
+    background: rgba(255, 255, 255, 0.05);
+    /* Glassy touch */
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #fff;
+    padding: 16px 36px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(4px);
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-outline-white:hover {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-outline-white::after {
+    content: "→";
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.btn-outline-white:hover::after {
+    transform: translateX(4px);
+}
+
+/* State: Map Visible */
+.location-atmospheric.map-visible .location-cover-layer {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    /* Let clicks pass through to map */
 }
 
 
@@ -741,26 +829,14 @@ p {
         /* Disable stagger on mobile */
     }
 
-    .location-wrapper {
-        flex-direction: column;
-        height: auto;
+    /* Atmospheric Location Mobile */
+    .location-atmospheric {
+        height: 500px;
+        /* Slightly smaller on mobile */
     }
 
-    .location-map-full {
-        position: relative;
-        height: 400px;
-        order: 2;
-        /* Map bottom */
-    }
-
-    .location-card-floating {
-        margin: 0;
-        max-width: 100%;
-        order: 1;
-        /* Content top */
-        padding: 40px 20px;
-        box-shadow: none;
-        background: #fff;
+    .cover-content h2 {
+        font-size: 32px;
     }
 }
 
@@ -1630,24 +1706,7 @@ footer {
 }
 
 /* ---------- VIDEO HIGHLIGHT SECTION ---------- */
-#video-highlight {
-    padding: 0;
-    position: relative;
-    width: 100%;
-    height: 80vh;
-    /* Immersive height */
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #000;
-}
 
-#video-highlight video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
 
 /* Gallery Video Support */
 .photo-card video {
@@ -1661,4 +1720,13 @@ footer {
 .photo-card:hover video {
     transform: scale(1.05);
     /* Match image zoom */
+}
+
+.cover-video-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
 }

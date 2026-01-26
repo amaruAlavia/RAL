@@ -200,3 +200,13 @@ if (aboutSection && aboutImg && window.innerWidth > 900) {
         }
     });
 }
+
+// Location Map Reveal
+const revealMapBtn = document.getElementById('revealMapBtn');
+const locationSection = document.getElementById('ubicacion');
+
+if (revealMapBtn && locationSection) {
+    revealMapBtn.addEventListener('click', () => {
+        locationSection.classList.add('map-visible');
+    });
+}
